@@ -10,12 +10,12 @@ Clang Version of NDK Android GLES Tutorial
 3.Edit the `Android.mk` Files
 
 ```
-LOCAL_PATH			:= $(call my-dir)
-//Locate Common Folder
-SRC_PATH			:= ../../.. 
-COMMON_PATH			:= $(SRC_PATH)/Common
-COMMON_INC_PATH		:= $(COMMON_PATH)/Include
-COMMON_SRC_PATH		:= $(COMMON_PATH)/Source
+LOCAL_PATH          := $(call my-dir)
+                                //Locate Common Folder
+SRC_PATH            := ../../.. 
+COMMON_PATH         := $(SRC_PATH)/Common
+COMMON_INC_PATH     := $(COMMON_PATH)/Include
+COMMON_SRC_PATH     := $(COMMON_PATH)/Source
 
 include $(CLEAR_VARS)
 //Module Name
@@ -24,19 +24,19 @@ LOCAL_CFLAGS    += -DANDROID
 
 
 LOCAL_SRC_FILES := $(COMMON_SRC_PATH)/esShader.c \
-				   $(COMMON_SRC_PATH)/esShapes.c \
-				   $(COMMON_SRC_PATH)/esTransform.c \
-				   $(COMMON_SRC_PATH)/esUtil.c \
-				   $(COMMON_SRC_PATH)/Android/esUtil_Android.c \
-           //Your Clang Class 
-				   $(LOCAL_PATH)/Hello_Triangle.c
-				   
-				   
-				   
+                   $(COMMON_SRC_PATH)/esShapes.c \
+                   $(COMMON_SRC_PATH)/esTransform.c \
+                   $(COMMON_SRC_PATH)/esUtil.c \
+                   $(COMMON_SRC_PATH)/Android/esUtil_Android.c \
+                           //Your Clang Class 
+                   $(LOCAL_PATH)/Hello_Triangle.c
+                   
+                   
+                   
 
-LOCAL_C_INCLUDES	:= $(SRC_PATH) \
-					   $(COMMON_INC_PATH)
-				   
+LOCAL_C_INCLUDES    := $(SRC_PATH) \
+                       $(COMMON_INC_PATH)
+                   
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv3
 
 LOCAL_STATIC_LIBRARIES := android_native_app_glue
