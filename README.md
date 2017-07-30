@@ -94,7 +94,7 @@ sourceSets.main {
 
 for C interact With Java,you can read these:
 
-1.[Calling OpenGL from C on Android, Using the NDK]http://www.learnopengles.com/calling-opengl-from-android-using-the-ndk/
+1.[Calling OpenGL from C on Android, Using the NDK](http://www.learnopengles.com/calling-opengl-from-android-using-the-ndk/)
 
 2.With Gradle 0.7.2+ you can put your native libraries directly into `src/main/jniLibs` and it will work automatically. https://stackoverflow.com/a/22488155/1636584 https://stackoverflow.com/a/16993006/1636584
 
