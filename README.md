@@ -89,3 +89,31 @@ sourceSets.main {
 ```
 
 8.CMD + R,run your project
+
+##Further Reading
+
+for C interact With Java,you can read these:
+
+1.[Calling OpenGL from C on Android, Using the NDK]http://www.learnopengles.com/calling-opengl-from-android-using-the-ndk/
+
+2.With Gradle 0.7.2+ you can put your native libraries directly into `src/main/jniLibs` and it will work automatically. https://stackoverflow.com/a/22488155/1636584 https://stackoverflow.com/a/16993006/1636584
+
+3.[How to define NDK_MODULE_PATH](https://stackoverflow.com/questions/8549691/how-to-specify-directory-for-ndk-module-path)
+
+For Example in `Android.mk`,you need define the local static lib's path
+
+```
+LOCAL_STATIC_LIBRARIES := libpng
+...
+$(call import-module,third_party/libpng)
+```
+
+In `~/.bash_profile`,you need define `NDK_MODULE_PATH':
+
+```
+export NDK_MODULE_PATH=/Users/MartinRGB/Library/Android/sdk/ndk-bundle/sources
+```
+
+also you need download [libpng-android](https://github.com/julienr/libpng-android),`ndk-build` to complie,then put it into `${NDK_MODULE_PATH}/third_party`
+
+at last,in JNI Folder,`ndk-build`
