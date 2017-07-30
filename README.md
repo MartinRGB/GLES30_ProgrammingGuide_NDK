@@ -5,7 +5,7 @@ Clang Version of NDK Android GLES Tutorial
 
 1.Download or clone this project,inside the folder,create Android Studio Project
 
-2.Add `JNI Folder` In AS,Drag `Android.mk` `Application.mk`(in template) into JNI Folder,also add your Clang files into JNI Folder
+2.Add `JNI Folder` In AS,for AS Load `JNILibs` easily,my JNI Folder path is:`${Project}/app/jni`,Drag `Android.mk` `Application.mk`(in template) into JNI Folder,also add your Clang files into JNI Folder
 
 3.Edit the `Android.mk` Files
 
