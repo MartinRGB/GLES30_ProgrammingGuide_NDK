@@ -11,7 +11,7 @@ Clang Version of NDK Android GLES Tutorial
 
 ```
 LOCAL_PATH          := $(call my-dir)
-                                //Locate Common Folder
+                    //Locate Common Folder
 SRC_PATH            := ../../.. 
 COMMON_PATH         := $(SRC_PATH)/Common
 COMMON_INC_PATH     := $(COMMON_PATH)/Include
@@ -28,7 +28,7 @@ LOCAL_SRC_FILES := $(COMMON_SRC_PATH)/esShader.c \
                    $(COMMON_SRC_PATH)/esTransform.c \
                    $(COMMON_SRC_PATH)/esUtil.c \
                    $(COMMON_SRC_PATH)/Android/esUtil_Android.c \
-                           //Your Clang Class 
+                   //Your Clang Class 
                    $(LOCAL_PATH)/Hello_Triangle.c
                    
                    
