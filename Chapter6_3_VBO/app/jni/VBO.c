@@ -1,0 +1,221 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Dan Ginsburg, Budirijanto Purnomo
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+//
+// Book:      OpenGL(R) ES 3.0 Programming Guide, 2nd Edition
+// Authors:   Dan Ginsburg, Budirijanto Purnomo, Dave Shreiner, Aaftab Munshi
+// ISBN-10:   0-321-93388-5
+// ISBN-13:   978-0-321-93388-1
+// Publisher: Addison-Wesley Professional
+// URLs:      http://www.opengles-book.com
+//            http://my.safaribooksonline.com/book/animation-and-3d/9780133440133
+//
+// Example_6_3.c
+//
+//    This example demonstrates using client-side vertex arrays
+//    and a constant vertex attribute
+//
+#include "esUtil.h"
+
+typedef struct
+{
+   // Handle to a program object
+   GLuint programObject;
+   GLuint vboIds[2];
+   GLfloat offsetLoc;
+
+} UserData;
+
+
+#define VERTEX_POS_SIZE 3
+#define VERTEX_COLOR_SIZE 4
+#define VERTEX_POS_INDX 0
+#define VERTEX_COLOR_INDX 1
+
+
+///
+// Initialize the program object
+//
+int Init ( ESContext *esContext )
+{
+   UserData *userData = esContext->userData;
+   const char vShaderStr[] =
+      "#version 300 es                            \n"
+      "layout(location = 0) in vec4 a_position;   \n"
+      "layout(location = 1) in vec4 a_color;      \n"
+      "uniform float u_offset;                    \n"
+      "out vec4 v_color;                          \n"
+      "void main()                                \n"
+      "{                                          \n"
+      "    v_color = a_color;                     \n"
+      "    gl_Position = vec4(a_position.x+u_offset/10.,a_position.y+u_offset/10.,a_position.z,a_position.w);              \n"
+      "}";
+
+
+   const char fShaderStr[] =
+      "#version 300 es            \n"
+      "precision mediump float;   \n"
+      "in vec4 v_color;           \n"
+      "uniform float u_offset;    \n"
+      "out vec4 o_fragColor;      \n"
+      "void main()                \n"
+      "{                          \n"
+      "    o_fragColor = v_color; \n"
+      "}" ;
+
+   GLuint programObject;
+
+   // Create the program object
+   programObject = esLoadProgram ( vShaderStr, fShaderStr );
+
+   if ( programObject == 0 )
+   {
+      return GL_FALSE;
+   }
+
+   // Store the program object
+   userData->programObject = programObject;
+
+   userData->offsetLoc = glGetUniformLocation ( programObject, "u_offset" );
+
+   glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
+   return GL_TRUE;
+}
+
+
+
+void DrawPrimitiveWithoutVBOS(GLfloat * vertices,GLint vtxStride,GLint numIndices,GLushort * indices){
+   GLfloat * vtxBuf = vertices;
+   glBindBuffer(GL_ARRAY_BUFFER,0);
+   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+
+   glEnableVertexAttribArray(VERTEX_POS_INDX);
+   glEnableVertexAttribArray(VERTEX_COLOR_INDX);
+
+   glVertexAttribPointer(VERTEX_POS_INDX,VERTEX_POS_SIZE,GL_FLOAT,GL_FALSE,vtxStride,vtxBuf);
+   
+   vtxBuf += VERTEX_POS_SIZE;
+
+   glVertexAttribPointer(VERTEX_COLOR_INDX,VERTEX_COLOR_SIZE,GL_FLOAT,GL_FALSE,vtxStride,vtxBuf);
+
+   glDrawElements(GL_TRIANGLES,numIndices,GL_UNSIGNED_SHORT,indices);
+
+   glDisableVertexAttribArray(VERTEX_POS_INDX);
+   glDisableVertexAttribArray(VERTEX_COLOR_INDX);
+}
+
+void DrawPrimitiveWithVBOS(ESContext * esContext,GLint numVertices,GLfloat * vtxBuf,GLint vtxStride,GLint numIndices,GLushort * indices){
+   UserData * userData = (UserData *) esContext -> userData;
+   GLuint offset = 0;
+
+   if(userData->vboIds[0] == 0 && userData ->vboIds[1] == 0){
+      glGenBuffers(2,userData->vboIds);
+
+      //顶点属性数据
+      glBindBuffer(GL_ARRAY_BUFFER,userData->vboIds[0]);
+      glBufferData(GL_ARRAY_BUFFER,vtxStride*numVertices,vtxBuf,GL_STATIC_DRAW);
+
+      //Primitivie 元素索引
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,userData->vboIds[1]);
+      glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(GLushort)*numIndices,indices,GL_STATIC_DRAW);
+
+   }
+
+   glBindBuffer(GL_ARRAY_BUFFER,userData->vboIds[0]);
+   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,userData->vboIds[1]);
+
+   glEnableVertexAttribArray(VERTEX_POS_INDX);
+   glEnableVertexAttribArray(VERTEX_COLOR_INDX);
+
+   glVertexAttribPointer(VERTEX_POS_INDX,VERTEX_POS_SIZE,GL_FLOAT,GL_FALSE,vtxStride,(const void*)offset);
+
+   offset += VERTEX_POS_SIZE*sizeof(GLfloat);
+
+   glVertexAttribPointer(VERTEX_COLOR_INDX,VERTEX_COLOR_SIZE,GL_FLOAT,GL_FALSE,vtxStride,(const void*)offset);
+
+   glDrawElements(GL_TRIANGLES,numIndices,GL_UNSIGNED_SHORT,0);
+
+   glDisableVertexAttribArray(VERTEX_POS_INDX);
+   glDisableVertexAttribArray(VERTEX_COLOR_INDX);
+
+   //Notice here
+   glBindBuffer(GL_ARRAY_BUFFER,0);
+   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+
+}
+
+
+void Draw ( ESContext *esContext )
+{
+   UserData *userData = (UserData*) esContext->userData;
+   // 3 vertices, with (x,y,z) per-vertex
+   GLfloat vertices[3 * 3] =
+   {
+      -0.5f,  0.5f, 0.0f,         // v0
+       1.0f,  0.0f, 0.0f, 1.0f,   // c0
+      -1.0f, -0.5f, 0.0f,         // v1
+       0.0f,  1.0f, 0.0f, 1.0f,   // c1
+       0.5f, -0.5f, 0.0f,         // v2
+       0.0f,  0.0f, 1.0f, 1.0f,   // c3
+   };
+
+   //Notice here:index buffer data
+   GLushort indices[3] = {0,1,2};
+
+   glViewport ( 0, 0, esContext->width, esContext->height );
+   glClear ( GL_COLOR_BUFFER_BIT );
+   glUseProgram ( userData->programObject );
+
+   //Without VBO
+   glUniform1f (userData->offsetLoc,0.0f);
+   DrawPrimitiveWithoutVBOS(vertices,sizeof(GLfloat)*(VERTEX_POS_SIZE+VERTEX_COLOR_SIZE),3,indices);
+
+   //With VBO
+   glUniform1f (userData->offsetLoc,1.0f);
+   DrawPrimitiveWithVBOS(esContext,3,vertices,sizeof(GLfloat)*(VERTEX_POS_SIZE+VERTEX_COLOR_SIZE),3,indices);
+
+}
+
+
+void Shutdown ( ESContext *esContext )
+{
+   UserData *userData = esContext->userData;
+
+   glDeleteProgram ( userData->programObject );
+}
+
+int esMain ( ESContext *esContext )
+{
+   esContext->userData = malloc ( sizeof ( UserData ) );
+
+   esCreateWindow ( esContext, "Example 6-3", 320, 240, ES_WINDOW_RGB );
+
+   if ( !Init ( esContext ) )
+   {
+      return GL_FALSE;
+   }
+
+   esRegisterShutdownFunc ( esContext, Shutdown );
+   esRegisterDrawFunc ( esContext, Draw );
+
+   return GL_TRUE;
+}
