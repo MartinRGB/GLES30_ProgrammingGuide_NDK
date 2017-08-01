@@ -1,5 +1,5 @@
 # GLES30_ProgrammingGuide_NDK
-Clang Version of NDK Android GLES Tutorial
+C with NDK Android GLES Tutorial
 
 ## How to
 
