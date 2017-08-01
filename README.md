@@ -166,6 +166,13 @@ glBindBufferBase(GL_UNIFORM_BUFFER,bindingPoint,buffer);
 void glReleaseShaderCompiler (void)
 ```
 
+### 平滑着色和平面着色 (smooth & flat)
+
+`smooth 着色` - 默认着色方法，根据 vert 输出变量在 primitive 中平滑插值
+
+`flat 着色` - vert 中的数值应用到 primitive 中所有的片段
+
+
 ### 加载顶点属性的几种方法
 
 #### Vertex Array
