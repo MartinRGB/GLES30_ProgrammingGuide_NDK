@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Chapter2_Hello_Triangle.iml" filepath="$PROJECT_DIR$/Chapter2_Hello_Triangle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter6_1_VertexArray.iml" filepath="$PROJECT_DIR$/Chapter6_1_VertexArray.iml" />
       <module fileurl="file://$PROJECT_DIR$/Chapter6_3_VAO.iml" filepath="$PROJECT_DIR$/Chapter6_3_VAO.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
