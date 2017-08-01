@@ -120,6 +120,52 @@ at last,in JNI Folder,`ndk-build`
 
 ## **Concept**
 
+### 统一变量块 (Uniform Block) 和 统一变量缓冲区对象 ( Uniform Buffer Object)
+
+使用 UBO 的方式可以建立缓冲区存储统一变量快数据，在统一变量块大幅更新时，**降低 API 开销**。
+
+> 循环绘制多块buffer，而每次循环都要给buffer传入大量的uniform，导致shader的渲染效率极低。
+
+除此之外， UBO 可以在多个 program 中共享，只需设置一次而已。而且可以存储更多的 uniform 数据。
+
+一个 UBO 构建的案例如下:
+
+```
+GLuint blockId,bufferId;
+GLint blockSize;
+GLuint bindingPoint = 1;
+
+GLFloat lightData[] = {
+  //LightDirection
+  1.0f,0.0f,0.0f,0.0f,
+  //LightPosition
+  0.0f,0.0f,0.0f,1.0f
+}
+//检索&获取统一变量块 索引 - glGetUniformBlockIndex(program,blockName)
+blockId = glGetUniformBlockIndex(program,"LightBlock");
+//绑定索引 和 统一变量块绑定点 - glUniformBlockBinding(program,blockIndex,blockBinding)
+glUniformBlockBinding(program,blockId,bindingPoint);
+//确定 Uniform Block 的细节 - glGetActiveUniformBlockname (program,index,pname,params)
+glGetActiveUniformBlockiv(program,blockId,GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
+
+//创建并填充缓冲区对象
+glGenBuffers(1,&bufferId);
+glBindBuffer(GL_UNIFORM_BUFFER，bufferId0;
+glBufferData(GL_UNIFORM_BUFFER,blockSize,lightData,GL_DYNAMIC_DRAW);
+
+//将 统一变量快 绑定点 和缓冲区对象绑定
+glBindBufferBase(GL_UNIFORM_BUFFER,bindingPoint,buffer);
+```
+### 着色器编译完成后的释放
+
+在之前编写 GLES 2.0 项目中，编写的着色器部分，在完成编译后，并没有释放资源。
+
+一旦完成了 Shader 的编译，实际上可以释放了
+
+```
+void glReleaseShaderCompiler (void)
+```
+
 ### 加载顶点属性的几种方法
 
 #### Vertex Array
