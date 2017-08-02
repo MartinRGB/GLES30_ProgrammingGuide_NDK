@@ -39,6 +39,8 @@
 //
 #include "esUtil.h"
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 //////////////////////////////////////////////////////////////////
 //
@@ -61,6 +63,10 @@
 /// \param shaderSrc Shader source string
 /// \return A new shader object on success, 0 on failure
 //
+
+
+
+
 GLuint ESUTIL_API esLoadShader ( GLenum type, const char *shaderSrc )
 {
    GLuint shader;
