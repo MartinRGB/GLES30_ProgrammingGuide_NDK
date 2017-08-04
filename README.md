@@ -1,6 +1,8 @@
 # GLES30_ProgrammingGuide_NDK
 C with NDK Android GLES Tutorial
 
+For test & write shader easily ,I use [ShaderFrog](http://shaderfrog.com/app/profile/MartinRGB) to write GLSL
+
 ## How to
 
 1.Download or clone this project,inside the folder,create Android Studio Project
