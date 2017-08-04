@@ -121,6 +121,7 @@ int Init ( ESContext *esContext )
    const char vShaderStr[] =
          "#version 320 es\n"
          "\n"
+         "precision highp float;                       \n"
          "layout (binding = 1) uniform u_light\n"
          "{\n"
          "    vec4 light_position;\n"
