@@ -90,7 +90,7 @@ GLfloat lightFloats[18] = {
    //direction
    0.0f, 1.0f, 1.0f, 
    //halfplane
-   0.0f, 0.4f, 0.0f, 
+   0.0f, 1.0f, 2.0f, 
    //ambient_color
    1.0f, 1.0f, 1.0f, 1.0f,
    //diffuse_color
