@@ -3,7 +3,7 @@ C with NDK Android GLES Tutorial
 
 For test & write shader easily ,I use [ShaderFrog](http://shaderfrog.com/app/profile/MartinRGB) to write GLSL
 
-For convert Text to C string literal,I use [Text -> C/C++ string converter]http://tomeko.net/online_tools/cpp_text_escape.php?lang=en
+For convert Text to C string literal,I use [Text -> C/C++ string converter](http://tomeko.net/online_tools/cpp_text_escape.php?lang=en)
 
 ## How to
 
