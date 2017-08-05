@@ -9,6 +9,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := MipMap2D
 LOCAL_CFLAGS    += -DANDROID
 
+LOCAL_ASSET_FILES := $(call find-subdir-assets assets)
 
 LOCAL_SRC_FILES := $(COMMON_SRC_PATH)/esShader.c \
 				   $(COMMON_SRC_PATH)/esShapes.c \

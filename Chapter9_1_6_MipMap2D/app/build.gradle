@@ -22,6 +22,7 @@ android {
         jni.srcDirs = []
     }
     //sourceSets { main { jni.srcDirs = ['src/main/jni', 'jni'] } }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'assets'] } }
 }
 
 dependencies {
