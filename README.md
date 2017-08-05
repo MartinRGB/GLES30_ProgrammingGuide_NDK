@@ -5,6 +5,8 @@ For test & write shader easily ,I use [ShaderFrog](http://shaderfrog.com/app/pro
 
 For convert Text to C string literal,I use [Text -> C/C++ string converter](http://tomeko.net/online_tools/cpp_text_escape.php?lang=en)
 
+For convert png/jpg to tga texture format,I use [Online-Convert](http://www.online-convert.com/result/d5cb1291-dbde-4ea1-b9fe-ec342aa640e1)
+
 ## How to
 
 1.Download or clone this project,inside the folder,create Android Studio Project
