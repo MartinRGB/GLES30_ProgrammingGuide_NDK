@@ -51,7 +51,43 @@ typedef struct
 
 } UserData;
 
-///
+//Log
+#include <android/log.h>
+#define APPNAME "Simple_Texture2D"
+
+
+/// 从本地磁盘读取 tga 材质
+// Load texture from disk
+//
+GLuint LoadTexture ( void *ioContext, char *fileName )
+{
+   int width,
+       height;
+
+   char *buffer = esLoadTGA ( ioContext, fileName, &width, &height );
+   GLuint texId;
+
+   if ( buffer == NULL )
+   {
+      esLogMessage ( "Error loading (%s) image.\n", fileName );
+      return 0;
+   }
+
+   glGenTextures ( 1, &texId );
+   glBindTexture ( GL_TEXTURE_2D, texId );
+
+   glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, buffer );
+   glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+   glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+   glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+   glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+
+   free ( buffer );
+
+   return texId;
+}
+
+/// 生成一张 2x2 纹理材质，带有四种颜色
 // Create a simple 2x2 texture image with four different colors
 //
 GLuint CreateSimpleTexture2D( )
@@ -78,7 +114,7 @@ GLuint CreateSimpleTexture2D( )
    glBindTexture ( GL_TEXTURE_2D, textureId );
 
    // Load the texture
-   glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, 4, 4, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels );
+   glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels );
 
    // Set the filtering mode
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
@@ -124,7 +160,17 @@ int Init ( ESContext *esContext )
    userData->samplerLoc = glGetUniformLocation ( userData->programObject, "s_texture" );
 
    // Load the texture
-   userData->textureId = CreateSimpleTexture2D ();
+   userData->textureId = LoadTexture(esContext->platformData, "sfsunset.tga");
+
+   //userData->textureId = CreateSimpleTexture2D ();
+
+
+   if ( userData->textureId == 0)
+   {
+      __android_log_print(ANDROID_LOG_VERBOSE, APPNAME, "texture Load failed",1+1);
+      return FALSE;
+
+   }
 
    glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    return TRUE;
@@ -136,13 +182,13 @@ int Init ( ESContext *esContext )
 void Draw ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
-   GLfloat vVertices[] = { -1.0f,  1.0f, 0.0f,  // Position 0
+   GLfloat vVertices[] = { -0.5f,  0.5f, 0.0f,  // Position 0
                             0.0f,  0.0f,        // TexCoord 0 
-                           -1.0f, -1.0f, 0.0f,  // Position 1
+                           -0.5f, -0.5f, 0.0f,  // Position 1
                             0.0f,  1.0f,        // TexCoord 1
-                            1.0f, -1.0f, 0.0f,  // Position 2
+                            0.5f, -0.5f, 0.0f,  // Position 2
                             1.0f,  1.0f,        // TexCoord 2
-                            1.0f,  1.0f, 0.0f,  // Position 3
+                            0.5f,  0.5f, 0.0f,  // Position 3
                             1.0f,  0.0f         // TexCoord 3
                          };
    GLushort indices[] = { 0, 1, 2, 0, 2, 3 };
