@@ -124,6 +124,8 @@ also you need download [libpng-android](https://github.com/julienr/libpng-androi
 
 at last,in JNI Folder,`ndk-build`
 
+4.[Secret of android.mk](http://android.mk/)
+
 ## **Concept & Optimization tips**
 
 See in the [Wiki](https://github.com/MartinRGB/GLES30_ProgrammingGuide_NDK/wiki)
