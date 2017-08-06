@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Chapter10_1_FragmentShader_MultiTexture.iml" filepath="$PROJECT_DIR$/Chapter10_1_FragmentShader_MultiTexture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter2_Hello_Triangle.iml" filepath="$PROJECT_DIR$/Chapter2_Hello_Triangle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter6_3_VAO.iml" filepath="$PROJECT_DIR$/Chapter6_3_VAO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter6_4_VAO.iml" filepath="$PROJECT_DIR$/Chapter6_4_VAO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter6_5_MapBufferObject.iml" filepath="$PROJECT_DIR$/Chapter6_5_MapBufferObject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter7_Instancing.iml" filepath="$PROJECT_DIR$/Chapter7_Instancing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter8_2_1_VertexShader_MVPMatrix.iml" filepath="$PROJECT_DIR$/Chapter8_2_1_VertexShader_MVPMatrix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter8_VertexShader.iml" filepath="$PROJECT_DIR$/Chapter8_VertexShader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter9_1_5_SimpleTexture.iml" filepath="$PROJECT_DIR$/Chapter9_1_5_SimpleTexture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter9_1_5_SimpleTexture2D.iml" filepath="$PROJECT_DIR$/Chapter9_1_5_SimpleTexture2D.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
