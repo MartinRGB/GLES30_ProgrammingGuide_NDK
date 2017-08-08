@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Chapter14_4_ParticleSystemTransformFeedback.iml" filepath="$PROJECT_DIR$/Chapter14_4_ParticleSystemTransformFeedback.iml" />
       <module fileurl="file://$PROJECT_DIR$/Chapter14_9_TerrainRendering.iml" filepath="$PROJECT_DIR$/Chapter14_9_TerrainRendering.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter14_9_TerrainRendering.iml" filepath="$PROJECT_DIR$/Chapter14_9_TerrainRendering.iml" />
       <module fileurl="file://$PROJECT_DIR$/Chapter2_Hello_Triangle.iml" filepath="$PROJECT_DIR$/Chapter2_Hello_Triangle.iml" />
       <module fileurl="file://$PROJECT_DIR$/Chapter6_3_VAO.iml" filepath="$PROJECT_DIR$/Chapter6_3_VAO.iml" />
       <module fileurl="file://$PROJECT_DIR$/Chapter6_4_VAO.iml" filepath="$PROJECT_DIR$/Chapter6_4_VAO.iml" />
@@ -11,6 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/Chapter7_Instancing.iml" filepath="$PROJECT_DIR$/Chapter7_Instancing.iml" />
       <module fileurl="file://$PROJECT_DIR$/Chapter8_2_1_VertexShader_MVPMatrix.iml" filepath="$PROJECT_DIR$/Chapter8_2_1_VertexShader_MVPMatrix.iml" />
       <module fileurl="file://$PROJECT_DIR$/Chapter8_VertexShader.iml" filepath="$PROJECT_DIR$/Chapter8_VertexShader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

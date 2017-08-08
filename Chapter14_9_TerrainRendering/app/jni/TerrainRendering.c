@@ -208,7 +208,7 @@ int Init ( ESContext *esContext )
    }
 
    // Generate the position and indices of a square grid for the base terrain
-   userData->gridSize = 1000;
+   userData->gridSize = 100;
    userData->numIndices = esGenSquareGrid ( userData->gridSize, &positions, &indices );
 
    // Index buffer for base terrain
