@@ -500,6 +500,7 @@ void Draw ( ESContext *esContext )
    // Set the sampler texture unit to 0
    glUniform1i ( userData->shadowMapSamplerLoc, 0 );
 
+   //完成深度值检测后，开始渲染场景
    DrawScene ( esContext, userData->sceneMvpLoc, userData->sceneMvpLightLoc );
 }
 
