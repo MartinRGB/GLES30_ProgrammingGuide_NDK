@@ -81,6 +81,8 @@ typedef struct
 
 #define NOISE_TABLE_MASK   255
 
+//定义了glsl中一些内建函数的公式
+
 #define FLOOR(x)           ((int)(x) - ((x) < 0 && (x) != (int)(x)))
 #define smoothstep(t)      ( t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f ) )
 #define lerp(t, a, b)      ( a + t * (b - a) )
@@ -90,9 +92,11 @@ typedef struct
 #endif
 
 // lattice gradients 3D noise
+// 晶格化渐变 3D噪音
 static float   gradientTable[256 * 3];
 
 // permTable describes a random permutatin of 8-bit values from 0 to 255.
+// 生成一份临时梯度向量表
 static unsigned char permTable[256] =
 {
    0xE1, 0x9B, 0xD2, 0x6C, 0xAF, 0xC7, 0xDD, 0x90, 0xCB, 0x74, 0x46, 0xD5, 0x45, 0x9E, 0x21, 0xFC,
@@ -113,6 +117,7 @@ static unsigned char permTable[256] =
    0x89, 0xD6, 0x91, 0x5D, 0x5C, 0x64, 0xF5, 0x00, 0xD8, 0xBA, 0x3C, 0x53, 0x69, 0x61, 0xCC, 0x34,
 };
 
+// 根据临时数据表，生成 3D 噪音表
 void initNoiseTable()
 {
    int            i;
@@ -162,7 +167,7 @@ void initNoiseTable()
 //
 // (ix, iy, iz) specifies the 3D lattice position
 // (fx, fy, fz) specifies the fractional part
-//
+// ix iy iz 代表 3D 晶格位置 fx fy fz 代表小数部分
 static float glattice3D ( int ix, int iy, int iz, float fx, float fy, float fz )
 {
    float *g;
@@ -180,7 +185,7 @@ static float glattice3D ( int ix, int iy, int iz, float fx, float fy, float fz )
 // generate the 3D noise value
 // f describes the input (x, y, z) position for which the noise value needs to be computed
 // noise3D returns the scalar noise value
-//
+// 
 float noise3D ( float *f )
 {
    int   ix, iy, iz;
